@@ -13,6 +13,99 @@ const ChatList = () => {
                 <img src={addMode ? "./minus.png" : "./plus.png"} alt="" className="add" 
                 onClick={() => setAddMode((prev) => !prev)}/>
             </div>
+
+
+            {/* List of chats  */}
+            {/* 1st */}
+            <div className="item">
+                <img src="./avatar.png"  alt=""/>
+                <div className="texts">
+                    <span>Ayush</span>
+                    <p>Hello</p>
+                </div>
+            </div>
+
+            {/* 2nd */}
+            <div className="item">
+                <img src="./avatar.png"  alt=""/>
+                <div className="texts">
+                    <span>Ayush</span>
+                    <p>Hello</p>
+                </div>
+            </div>
+
+            {/* 3rd */}
+            <div className="item">
+                <img src="./avatar.png"  alt=""/>
+                <div className="texts">
+                    <span>Ayush</span>
+                    <p>Hello</p>
+                </div>
+            </div>
+
+            {/* 4th */}
+            <div className="item">
+                <img src="./avatar.png"  alt=""/>
+                <div className="texts">
+                    <span>Ayush</span>
+                    <p>Hello</p>
+                </div>
+            </div>
+
+            {/* 5th */}
+            <div className="item">
+                <img src="./avatar.png"  alt=""/>
+                <div className="texts">
+                    <span>Ayush</span>
+                    <p>Hello</p>
+                </div>
+            </div>
+
+        {/* 1st */}
+        <div className="item">
+                <img src="./avatar.png"  alt=""/>
+                <div className="texts">
+                    <span>Ayush</span>
+                    <p>Hello</p>
+                </div>
+            </div>
+
+            {/* 2nd */}
+            <div className="item">
+                <img src="./avatar.png"  alt=""/>
+                <div className="texts">
+                    <span>Ayush</span>
+                    <p>Hello</p>
+                </div>
+            </div>
+
+            {/* 3rd */}
+            <div className="item">
+                <img src="./avatar.png"  alt=""/>
+                <div className="texts">
+                    <span>Ayush</span>
+                    <p>Hello</p>
+                </div>
+            </div>
+
+            {/* 4th */}
+            <div className="item">
+                <img src="./avatar.png"  alt=""/>
+                <div className="texts">
+                    <span>Ayush</span>
+                    <p>Hello</p>
+                </div>
+            </div>
+
+            {/* 5th */}
+            <div className="item">
+                <img src="./avatar.png"  alt=""/>
+                <div className="texts">
+                    <span>Ayush</span>
+                    <p>Hello</p>
+                </div>
+            </div>
+
         </div>
     )
 }

@@ -18,4 +18,3 @@ const Userinfo = () =>{
 
 export default Userinfo;
 
-//00:20:39
