@@ -1,16 +1,22 @@
 import "./chat.css";
 import EmojiPicker from  "emoji-picker-react";
-import { doc, onSnapshot } from "firebase/firestore";
+import { arrayUnion, doc, getDoc, onSnapshot, updateDoc } from "firebase/firestore";
 import { useEffect, useState, useRef } from "react";
 import { db } from "../../lib/firebase";
 import { useChatStore } from "../../lib/chatStore";
+import { useUserStore } from "../../lib/userStore";
 
 const Chat = () => {
     const [chat, setChat] = useState();
     const [open, setOpen] = useState(false);
     const [text, setText] = useState("");
+    const [img, setImg] = useState({
+        file: null,
+        url: "",
+      });
 
-    const {chatId} = useChatStore();
+    const {chatId, user} = useChatStore();
+    const {currentUser} = useUserStore();
 
     const endRef = useRef(null);
 
@@ -35,7 +41,62 @@ const Chat = () => {
         setText((prev) => prev + e.emoji);
         setOpen(false);
     }
-    console.log(text);
+
+    
+    const handleSend = async () => {
+        if (text === "") return;
+    
+        let imgUrl = null;
+    
+        try {
+          if (img.file) {
+            imgUrl = await upload(img.file);
+          }
+    
+          await updateDoc(doc(db, "chats", chatId), {
+            messages: arrayUnion({
+              senderId: currentUser.id,
+              text,
+              createdAt: new Date(),
+              ...(imgUrl && { img: imgUrl }),
+            }),
+          });
+    
+          const userIDs = [currentUser.id, user.id];
+    
+          userIDs.forEach(async (id) => {
+            const userChatsRef = doc(db, "userchats", id);
+            const userChatsSnapshot = await getDoc(userChatsRef);
+    
+            if (userChatsSnapshot.exists()) {
+              const userChatsData = userChatsSnapshot.data();
+    
+              const chatIndex = userChatsData.chats.findIndex(
+                (c) => c.chatId === chatId
+              );
+    
+              userChatsData.chats[chatIndex].lastMessage = text;
+              userChatsData.chats[chatIndex].isSeen =
+                id === currentUser.id ? true : false;
+              userChatsData.chats[chatIndex].updatedAt = Date.now();
+    
+              await updateDoc(userChatsRef, {
+                chats: userChatsData.chats,
+              });
+            }
+          });
+        } catch (err) {
+          console.log(err);
+        } finally{
+        setImg({
+          file: null,
+          url: "",
+        });
+    
+        setText("");
+        }
+      };
+
     return (
         <div className="chat">
             <div className="top">
@@ -86,7 +147,7 @@ const Chat = () => {
                         <EmojiPicker open={open} onEmojiClick={handleEmoji} />
                     </div> 
                 </div>
-                <button className="sendButton" >Send</button>
+                <button className="sendButton" onClick={handleSend}>Send</button>
             </div>
         </div>
     )
