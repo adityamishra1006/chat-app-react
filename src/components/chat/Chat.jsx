@@ -54,94 +54,19 @@ const Chat = () => {
             </div>
             {/* Center */}
             <div className="center">
-                <div className="message">
-                    <img src="./avatar.png" alt=""/>
+                {chat?.messages?.map((message) =>(
+
+                <div className="message own" key={message?.createdAt}>
                     <div className="texts">
+                    {message.img &&
+                        <img src={message.img} alt=""/>}
                         <p>
-                            Hii, How are you?<br/>
-                            I hope you are good... 
+                            {message.text}
                         </p>
                         <span>1 mins ago</span>
                     </div>
                 </div>
-
-
-                <div className="message own">
-                    <div className="texts">
-                        <p>
-                            Hii, How are you?<br/>
-                            I hope you are good... 
-                        </p>
-                        <span>1 mins ago</span>
-                    </div>
-                </div>
-
-                <div className="message">
-                    <img src="./avatar.png" alt=""/>
-                    <div className="texts">
-                        <p>
-                            Hii, How are you?<br/>
-                            I hope you are good... 
-                        </p>
-                        <span>1 mins ago</span>
-                    </div>
-                </div>
-
-
-                <div className="message own">
-                    <div className="texts">
-                    <img src="https://thumbs.dreamstime.com/z/panda-say-hii-cartoon-illustration-hi-white-background-57173885.jpg" />
-                        <p>
-                            Hii, How are you?<br/>
-                            I hope you are good... 
-                        </p>
-                        <span>1 mins ago</span>
-                    </div>
-                </div>
-
-                <div className="message">
-                    <img src="./avatar.png" alt=""/>
-                    <div className="texts">
-                        <p>
-                            Hii, How are you?<br/>
-                            I hope you are good... 
-                        </p>
-                        <span>1 mins ago</span>
-                    </div>
-                </div>
-
-
-                <div className="message own">
-                    <div className="texts">
-                        <p>
-                            Hii, How are you?<br/>
-                            I hope you are good... 
-                        </p>
-                        <span>1 mins ago</span>
-                    </div>
-                </div>
-
-                <div className="message">
-                    <img src="./avatar.png" alt=""/>
-                    <div className="texts">
-                        <p>
-                            Hii, How are you?<br/>
-                            I hope you are good... 
-                        </p>
-                        <span>1 mins ago</span>
-                    </div>
-                </div>
-
-
-                <div className="message own">
-                    <div className="texts">
-                        <p>
-                            Hii, How are you?<br/>
-                            I hope you are good... 
-                        </p>
-                        <span>1 mins ago</span>
-                    </div>
-                </div>
+                ))}
                 <div ref={endRef}></div>
             </div>
             <div className="bottom">
