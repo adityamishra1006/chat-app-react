@@ -5,6 +5,7 @@ import { useEffect, useState, useRef } from "react";
 import { db } from "../../lib/firebase";
 import { useChatStore } from "../../lib/chatStore";
 import { useUserStore } from "../../lib/userStore";
+import upload from "../../lib/upload";
 
 const Chat = () => {
     const [chat, setChat] = useState();
@@ -138,6 +139,13 @@ const Chat = () => {
                     </div>
                 </div>
                 ))}
+                {img.url && (
+                  <div className="message own">
+                    <div className="texts">
+                      <img src={img.url} alt="" />
+                    </div>
+                  </div>
+                )}
                 <div ref={endRef}></div>
             </div>
             <div className="bottom">
